@@ -1,0 +1,21 @@
+{
+  "name": "cse341-final-project",
+  "version": "1.0.0",
+  "description": "Our final project",
+  "homepage": "https://github.com/manuelarc06/cse341-final-project#readme",
+  "bugs": {
+    "url": "https://github.com/manuelarc06/cse341-final-project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuelarc06/cse341-final-project.git"
+  },
+  "license": "ISC",
+  "author": "Manuela Rodriguez & Valeria Rodriguez",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  }
+}
