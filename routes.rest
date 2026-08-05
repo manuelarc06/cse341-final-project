@@ -1,0 +1,43 @@
+### Home
+GET http://localhost:3003/
+
+###
+
+### Get all the pets
+GET http://localhost:3003/pets
+
+###
+
+### Get single pet
+GET http://localhost:3003/pets/6a721d8a1bcd3c3ad1c1ea83
+
+###
+
+### Get all owners
+GET http://localhost:3003/owners
+
+###
+
+### Get single owner
+GET http://localhost:3003/owners/6a721bba85c7d11623a6c483
+
+### Home (Render)
+https://cse341-final-project-zgcd.onrender.com/
+
+###
+
+### Get all pets (Render)
+https://cse341-final-project-zgcd.onrender.com/pets
+
+###
+
+### Get single pet (Render)
+GET https://cse341-final-project-zgcd.onrender.com/pets/6a721d8a1bcd3c3ad1c1ea83
+
+### Get all owners (Render)
+GET https://cse341-final-project-zgcd.onrender.com/owners
+
+###
+
+### Get single owner (Render)
+GET https://cse341-final-project-zgcd.onrender.com/owners/6a721bba85c7d11623a6c483
