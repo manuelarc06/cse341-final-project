@@ -2,6 +2,7 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
+    //#swagger.tags=['Owners']
     const result = await mongodb.getDatabase().db().collection('owners').find();
     result.toArray().then((owners) => {
         res.setHeader('Content-Type', 'application/json');
@@ -10,6 +11,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+    //#swagger.tags=['Owners']
     const ownerId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db().collection('owners').find({ _id: ownerId});
     result.toArray().then((owner) => {
@@ -19,6 +21,7 @@ const getSingle = async (req, res) => {
 };
 
 const createOwner = async (req, res) => {
+    //#swagger.tags=['Owners']
     const owner = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -35,6 +38,7 @@ const createOwner = async (req, res) => {
 };
 
 const updateOwner = async (req, res) => {
+    //#swagger.tags=['Owners']
     const ownerId = new ObjectId(req.params.id);
     const owner = {
         firstName: req.body.firstName,
@@ -52,6 +56,7 @@ const updateOwner = async (req, res) => {
 };
 
 const deleteOwner = async (req, res) => {
+    //#swagger.tags=['Owners']
     const ownerId = new ObjectId(req.params.id);
     const response = await mongodb.getDatabase().db().collection('owners').deleteOne({ _id: ownerId });
     if (response.deletedCount > 0) {
