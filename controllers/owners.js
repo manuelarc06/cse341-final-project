@@ -5,12 +5,9 @@ const getAll = async (req, res) => {
     //#swagger.tags=['Owners']
     try {
         const result = await mongodb.getDatabase().db().collection('owners').find();
-
-        result.toArray().then((owners) => {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(owners);
-        });
-
+        const owners = await result.toArray();
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(owners);
     } catch (err) {
         res.status(500).json({
             message: err.message
@@ -21,13 +18,19 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
     //#swagger.tags=['Owners']
     try {
+        if (!ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({
+                message: "Invalid owner ID format"
+            });
+        }
         const ownerId = new ObjectId(req.params.id);
-        const result = await mongodb.getDatabase().db().collection('owners').find({_id: ownerId});
-        result.toArray().then((owner) => {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(owner[0]);
-        });
-
+        const result = await mongodb.getDatabase().db().collection('owners').find({ _id: ownerId });
+        const owners = await result.toArray();
+        if (owners.length === 0) {
+            return res.status(404).json({ message: "Owner not found" });
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(owners[0]);
     } catch (err) {
         res.status(500).json({
             message: err.message
@@ -47,23 +50,26 @@ const createOwner = async (req, res) => {
         };
         const response = await mongodb.getDatabase().db().collection('owners').insertOne(owner);
         if (response.acknowledged) {
-            res.status(204).send();
+            res.status(201).json({ message: "Owner created successfully" });
         } else {
-            res.status(500).json(response.error || 'Some error occurred while creating the owner.');
+            res.status(500).json({
+                message: "Error creating owner"
+            });
         }
-
     } catch (err) {
-        res.status(500).json({
-            message: err.message
-        });
+        res.status(500).json({ message: err.message });
     }
 };
 
 const updateOwner = async (req, res) => {
     //#swagger.tags=['Owners']
     try {
+        if (!ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({
+                message: "Invalid owner ID format"
+            });
+        }
         const ownerId = new ObjectId(req.params.id);
-
         const owner = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -75,38 +81,33 @@ const updateOwner = async (req, res) => {
         if (response.modifiedCount > 0) {
             res.status(204).send();
         } else {
-            res.status(500).json(
-                response.error || 'Some error occurred while updating the owner.'
-            );
+            res.status(404).json({ message: "Owner not found or no changes made" });
         }
-
     } catch (err) {
-        res.status(500).json({
-            message: err.message
-        });
+        res.status(500).json({ message: err.message });
     }
 };
 
 const deleteOwner = async (req, res) => {
     //#swagger.tags=['Owners']
     try {
+        if (!ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: "Invalid owner ID format" });
+        }
         const ownerId = new ObjectId(req.params.id);
         const response = await mongodb.getDatabase().db().collection('owners').deleteOne({ _id: ownerId });
         if (response.deletedCount > 0) {
-            res.status(200).send();
+            res.status(200).json({ message: "Owner deleted successfully" });
         } else {
-            res.status(500).json(
-                response.error || 'Some error occurred while deleting the owner.'
-            );
+            res.status(404).json({ message: "Owner not found" });
         }
-
     } catch (err) {
         res.status(500).json({
             message: err.message
         });
     }
 };
-    
+
 module.exports = {
     getAll,
     getSingle,
