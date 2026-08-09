@@ -3,13 +3,16 @@ const router = express.Router();
 
 const petsController = require('../controllers/pets');
 
+const petValidation = require('../middleware/petValidation');
+const validate = require('../middleware/validate');
+
 router.get('/', petsController.getAll);
 
-router.get('/:id', petsController.getSingle);
+router.get('/:id', petValidation(), validate, petsController.getSingle);
 
-router.post('/', petsController.createPet);
+router.post('/', petValidation(), validate, petsController.createPet);
 
-router.put('/:id', petsController.updatePet);
+router.put('/:id', petValidation(), validate, petsController.updatePet);
 
 router.delete('/:id', petsController.deletePet);
 
