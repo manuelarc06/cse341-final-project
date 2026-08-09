@@ -4,7 +4,7 @@ const router = express.Router();
 const ownersController = require('../controllers/owners');
 
 const validate = require('../middleware/validate');
-const ownerValidation = require('../middleware/ownerValidator');
+const ownerValidation = require('../middleware/ownerValidation');
 
 router.get('/', ownersController.getAll);
 
