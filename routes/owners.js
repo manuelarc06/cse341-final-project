@@ -12,7 +12,7 @@ router.get('/:id', ownersController.getSingle);
 
 router.post('/', ownerValidation(), validate, ownersController.createOwner);
 
-router.put('/:id', ownerValidation(), validate,ownersController.updateOwner);
+router.put('/:id', ownerValidation(), validate, ownersController.updateOwner);
 
 router.delete('/:id', ownersController.deleteOwner);
 
