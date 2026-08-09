@@ -10,5 +10,6 @@ router.get('/', (req, res) => {
 router.use('/pets', require('./pets'));
 router.use('/owners', require('./owners'));
 router.use('/appointments', require('./appointments'));
+router.use('/veterinarians', require('./veterinarians'));
 
 module.exports = router;
