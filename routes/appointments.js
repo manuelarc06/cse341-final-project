@@ -3,13 +3,16 @@ const router = express.Router();
 
 const appointmentsController = require('../controllers/appointments');
 
+const appointmentValidation = require('../middleware/appointmentValidation');
+const validate = require('../middleware/validate');
+
 router.get('/', appointmentsController.getAll);
 
 router.get('/:id', appointmentsController.getSingle);
 
-router.post('/', appointmentsController.createAppointment);
+router.post('/', appointmentValidation(), validate, appointmentsController.createAppointment);
 
-router.put('/:id', appointmentsController.updateAppointment);
+router.put('/:id', appointmentValidation(), validate, appointmentsController.updateAppointment);
 
 router.delete('/:id', appointmentsController.deleteAppointment);
 
