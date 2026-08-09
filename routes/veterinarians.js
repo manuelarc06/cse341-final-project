@@ -4,7 +4,7 @@ const router = express.Router();
 const veterinariansController = require('../controllers/veterinarians');
 
 const validate = require('../middleware/validate');
-const veterinarianValidation = require('../middleware/veterinarianValidator');
+const veterinarianValidation = require('../middleware/veterinarianValidation');
 
 router.get('/', veterinariansController.getAll);
 
