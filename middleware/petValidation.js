@@ -37,7 +37,9 @@ const petValidation = () => {
     body('ownerId')
         .trim()
         .notEmpty()
-        .withMessage('Owner ID is required'),
+        .withMessage('Owner ID is required')
+        .isMongoId()
+        .withMessage('Owner ID must be a valid MongoDB ID'),
 
     body('vaccinationStatus')
         .trim()
