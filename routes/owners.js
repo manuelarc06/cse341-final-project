@@ -14,7 +14,7 @@ router.get('/:id', ownersController.getSingle);
 
 router.post('/', isAuthenticated, ownerValidation(), validate, ownersController.createOwner);
 
-router.put('/:id', isAuthenticated, ownerValidation(), validate,ownersController.updateOwner);
+router.put('/:id', isAuthenticated, ownerValidation(), validate, ownersController.updateOwner);
 
 router.delete('/:id', isAuthenticated, ownersController.deleteOwner);
 
