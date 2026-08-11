@@ -20,7 +20,7 @@ const getSingle = async (req, res) => {
     try {
         if (!ObjectId.isValid(req.params.id)) {
             return res.status(400).json({
-                message: "Invalid owner ID format"
+                message: "Invalid veterinarian ID format"
             });
         }
         const veterinarianId = new ObjectId(req.params.id);
