@@ -5,15 +5,16 @@ const petsController = require('../controllers/pets');
 
 const petValidation = require('../middleware/petValidation');
 const validate = require('../middleware/validate');
+const { isAuthenticated } = require("../middleware/authenticate");
 
 router.get('/', petsController.getAll);
 
 router.get('/:id', petsController.getSingle);
 
-router.post('/', petValidation(), validate, petsController.createPet);
+router.post('/', isAuthenticated, petValidation(), validate, petsController.createPet);
 
-router.put('/:id', petValidation(), validate, petsController.updatePet);
+router.put('/:id', isAuthenticated, petValidation(), validate, petsController.updatePet);
 
-router.delete('/:id', petsController.deletePet);
+router.delete('/:id', isAuthenticated, petsController.deletePet);
 
 module.exports = router;
