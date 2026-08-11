@@ -8,7 +8,7 @@ const validate = require('../middleware/validate');
 
 router.get('/', petsController.getAll);
 
-router.get('/:id', petValidation(), validate, petsController.getSingle);
+router.get('/:id', petsController.getSingle);
 
 router.post('/', petValidation(), validate, petsController.createPet);
 
